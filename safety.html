@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Women Safety App</title>
+
+    <!-- React -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: pink;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            padding: 20px;
+            width: 400px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0px 0px 10px gray;
+        }
+        
+        h1 {
+            color: red;
+        }
+        
+        button {
+            padding: 10px 15px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            color: white;
+            font-size: 16px;
+        }
+        
+        .sos {
+            background: red;
+            width: 100%;
+        }
+        
+        .location {
+            background: blue;
+        }
+        
+        .call {
+            background: green;
+        }
+        
+        .help {
+            background: orange;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 250px;
+            border: none;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        function App(){ const [map,setMap] = React.useState(""); function sosAlert(){ alert("SOS Alert Sent!"); } function getLocation(){ navigator.geolocation.getCurrentPosition((position)=>{ const lat = position.coords.latitude; const lon = position.coords.longitude;
+        setMap( `https://maps.google.com/maps?q=${lat},${lon}&z=15&output=embed` ); }); } function fakeCall(){ alert("Incoming Call from Mom"); } function nearbyHelp(){ window.open( "https://www.google.com/maps/search/police+station+near+me/" ); } return(
+
+        <div className="container">
+
+            <h1>Women Safety App</h1>
+
+            <button className="sos" onClick={sosAlert}>
+        Emergency SOS
+      </button>
+
+            <br/>
+
+            <button className="location" onClick={getLocation}>
+        Live Location
+      </button>
+
+            <button className="call" onClick={fakeCall}>
+        Fake Call
+      </button>
+
+            <button className="help" onClick={nearbyHelp}>
+        Nearby Help
+      </button> { map &&
+            <iframe src={map}></iframe> }
+
+        </div>
+
+        ); } ReactDOM.createRoot(document.getElementById("root")).render(
+
+        <App />);
+
+    </script>
+
+</body>
+
+</html>
